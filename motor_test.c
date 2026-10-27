@@ -1,6 +1,6 @@
 /*
 ENGR 10 motor test - spins each motor port one at a time, forward then backward.
-Works no matter which ports your motors are plugged into.
+Set test_port to the port you want (1-10), or 0 to run every port.
 
 HOW TO USE:
   1. Put the robot on a box/stand so the wheels are OFF the ground. Battery charged and switched on.
@@ -14,6 +14,7 @@ If a motor doesn't move when its port is running:
   - check the battery and that the Cortex is on
 */
 
+int test_port = 1;     // port to test (1-10), or 0 to test all ports
 int test_speed = 60;   // motor power, -127 to 127
 int run_time = 1500;   // ms each direction
 
@@ -23,6 +24,8 @@ task main(){
 	delay(3000);
 
 	for(int p = 0; p < 10; p++){
+		if(test_port != 0 && p != test_port - 1) continue;
+
 		writeDebugStreamLine("PORT %d: forward", p + 1);
 		motor[(tMotor)p] = test_speed;
 		delay(run_time);
