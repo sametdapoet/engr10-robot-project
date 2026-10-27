@@ -2,10 +2,25 @@
 
 ROBOTC programs for the VEX Cortex robot in the ENGR 10 robot project: turn off the red IR beacon, then push the green IR beacon out of the arena.
 
-- `robot_project.c`: full run (Tasks 1–4), built on the GOTO_BEACON sample
-- `gotobeacon.c`: original GOTO_BEACON sample program from the course
+ROBOTC setup: Robot → Platform Type → VEX 2.0 Cortex, Natural Language PLTW; communication mode USB Only.
 
-## Wiring assumed by robot_project.c
+## Week 1 (`week1/`)
+
+| File | Task |
+|------|------|
+| `practice1_ramp_up.c` | Practice 1: motor speed 0 → max in about 10 s |
+| `practice2_swing.c` | Practice 2: speed swings between forward max and reverse max |
+| `practice3_bumper.c` | Practice 3: bumper (digital port 1) stops the motor, release reverses it |
+| `motor_servo_check.c` | 4.1.4: motor back and forth, servo to a set number of degrees |
+
+All Week 1 programs use the motor on port 1; the servo check assumes the servo on port 2.
+
+## Week 2+
+
+- `gotobeacon.c`: GOTO_BEACON sample program from the course (Week 2: load and test)
+- `robot_project.c`: full run (Tasks 1–4), built on GOTO_BEACON
+
+### Wiring assumed by robot_project.c
 
 | Port | Device |
 |------|--------|
