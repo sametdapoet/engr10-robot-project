@@ -29,6 +29,6 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 | dgtl2 | Bumper switch |
 | dgtl3–4 | Ultrasonic sensor (INPUT in dgtl3, OUTPUT in dgtl4) |
 | port1 / port10 | Right / left drive motors |
-| port2 | Arm motor (via Motor Controller 29) |
+| port2 | Arm servo (the rod on top; via Motor Controller 29) |
 
-Tune the arm timings and Task 4 values at the top of `robot_project.c` on the real robot.
+Tune the arm servo positions and Task 4 values at the top of `robot_project.c` on the real robot.
