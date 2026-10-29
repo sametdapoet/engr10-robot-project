@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1450" viewBox="0 0 960 1450" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#374151"/>
+    </marker>
+    <style>
+      .band { stroke: none; }
+      .band-label { font-size: 14px; font-weight: bold; fill: #6b7280; letter-spacing: 0.5px; }
+      .action { fill: #e8f0fe; stroke: #3b6fd8; stroke-width: 2; }
+      .decision { fill: #fff4e0; stroke: #d98a00; stroke-width: 2; }
+      .recover { fill: #fdecec; stroke: #c94a4a; stroke-width: 2; }
+      .terminal { fill: #1f2937; stroke: #1f2937; }
+      .t { font-size: 15px; fill: #111827; text-anchor: middle; }
+      .tw { font-size: 16px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .yn { font-size: 14px; font-weight: bold; fill: #374151; }
+      .line { fill: none; stroke: #374151; stroke-width: 2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="960" height="1450" fill="#ffffff"/>
+
+  <!-- Task bands -->
+  <rect class="band" x="10" y="95" width="940" height="465" rx="10" fill="#f4f6fa"/>
+  <text class="band-label" x="24" y="118">TASK 1 · FIND RED BEACON</text>
+  <rect class="band" x="10" y="565" width="940" height="240" rx="10" fill="#fbf7f0"/>
+  <text class="band-label" x="24" y="588">TASK 2 · TURN OFF RED</text>
+  <rect class="band" x="10" y="810" width="940" height="190" rx="10" fill="#f4f6fa"/>
+  <text class="band-label" x="24" y="833">TASK 3 · FIND GREEN BEACON</text>
+  <rect class="band" x="10" y="1005" width="940" height="335" rx="10" fill="#fbf7f0"/>
+  <text class="band-label" x="24" y="1028">TASK 4 · PUSH GREEN OUT</text>
+
+  <!-- Start -->
+  <ellipse class="terminal" cx="430" cy="50" rx="70" ry="24"/>
+  <text class="tw" x="430" y="56">START</text>
+
+  <!-- 2: setup -->
+  <rect class="action" x="270" y="112" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="134">Raise arm (servo up)<tspan x="430" dy="19">Tune IR board to RED (1 kHz)</tspan></text>
+
+  <!-- 3: drive toward beacon -->
+  <rect class="action" x="270" y="212" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="234">Read 8 IR detectors, steer toward<tspan x="430" dy="19">brightest one (spin if none seen)</tspan></text>
+
+  <!-- 4: limit switch? -->
+  <polygon class="decision" points="430,300 580,355 430,410 280,355"/>
+  <text class="t" x="430" y="349">Front limit switch<tspan x="430" dy="19">pressed?</tspan></text>
+
+  <!-- 5: beacon strong? -->
+  <polygon class="decision" points="430,430 580,485 430,540 280,485"/>
+  <text class="t" x="430" y="479">Beacon signal<tspan x="430" dy="19">strong?</tspan></text>
+  <rect class="recover" x="660" y="457" width="240" height="56" rx="6"/>
+  <text class="t" x="780" y="479">It's a wall:<tspan x="780" dy="19">back up and turn</tspan></text>
+
+  <!-- 6: arm -->
+  <rect class="action" x="270" y="582" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="604">Lower arm onto the button,<tspan x="430" dy="19">then raise it</tspan></text>
+
+  <!-- 7: red off? -->
+  <polygon class="decision" points="430,675 580,730 430,785 280,730"/>
+  <text class="t" x="430" y="724">Red beacon off?<tspan x="430" dy="19">(check both frequencies)</tspan></text>
+  <rect class="recover" x="660" y="702" width="240" height="56" rx="6"/>
+  <text class="t" x="780" y="724">Back up, drive to red again<tspan x="780" dy="19">(max 3 tries, then go on)</tspan></text>
+
+  <!-- 8: switch to green -->
+  <rect class="action" x="270" y="832" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="854">Back away from red<tspan x="430" dy="19">Tune IR board to GREEN (10 kHz)</tspan></text>
+
+  <!-- 9: drive to green -->
+  <rect class="action" x="270" y="922" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="944">Drive to green beacon until<tspan x="430" dy="19">front limit switch is pressed</tspan></text>
+
+  <!-- 10: find open side -->
+  <rect class="action" x="270" y="1032" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="1054">Turn slowly until the sonar<tspan x="430" dy="19">sees open space</tspan></text>
+
+  <!-- 11: push -->
+  <rect class="action" x="270" y="1122" width="320" height="56" rx="6"/>
+  <text class="t" x="430" y="1155">Push the green beacon forward</text>
+
+  <!-- 12: bumper? -->
+  <polygon class="decision" points="430,1210 580,1265 430,1320 280,1265"/>
+  <text class="t" x="430" y="1259">Bumper hit<tspan x="430" dy="19">a wall?</tspan></text>
+  <rect class="recover" x="660" y="1237" width="240" height="56" rx="6"/>
+  <text class="t" x="780" y="1270">Back up and turn</text>
+
+  <!-- End -->
+  <ellipse class="terminal" cx="430" cy="1395" rx="150" ry="24"/>
+  <text class="tw" x="430" y="1401">END · green beacon is out</text>
+
+  <!-- Main flow arrows -->
+  <path class="line" d="M430,74 V112"/>
+  <path class="line" d="M430,168 V212"/>
+  <path class="line" d="M430,268 V300"/>
+  <path class="line" d="M430,410 V430"/>
+  <text class="yn" x="440" y="425">Yes</text>
+  <path class="line" d="M430,540 V582"/>
+  <text class="yn" x="440" y="560">Yes</text>
+  <path class="line" d="M430,638 V675"/>
+  <path class="line" d="M430,785 V832"/>
+  <text class="yn" x="440" y="808">Yes</text>
+  <path class="line" d="M430,888 V922"/>
+  <path class="line" d="M430,978 V1032"/>
+  <path class="line" d="M430,1088 V1122"/>
+  <path class="line" d="M430,1178 V1210"/>
+  <path class="line" d="M430,1320 V1371"/>
+  <text class="yn" x="440" y="1345">No (pushed long enough)</text>
+
+  <!-- Loops -->
+  <!-- 4 No: keep driving -->
+  <path class="line" d="M280,355 H170 V240 H270"/>
+  <text class="yn" x="190" y="345">No</text>
+  <!-- 5 No: wall, back to driving -->
+  <path class="line" d="M580,485 H660"/>
+  <text class="yn" x="600" y="475">No</text>
+  <path class="line" d="M780,457 V240 H590"/>
+  <!-- 7 No: retry arm -->
+  <path class="line" d="M580,730 H660"/>
+  <text class="yn" x="600" y="720">No</text>
+  <path class="line" d="M780,702 V610 H590"/>
+  <!-- 12 Yes: wall, find open side again -->
+  <path class="line" d="M580,1265 H660"/>
+  <text class="yn" x="596" y="1255">Yes</text>
+  <path class="line" d="M780,1237 V1060 H590"/>
+</svg>

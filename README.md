@@ -32,3 +32,9 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 | port2 | Arm servo (the rod on top; via Motor Controller 29) |
 
 Tune the arm servo positions and Task 4 values at the top of `robot_project.c` on the real robot.
+
+## Program logic flow
+
+![Robot control program flowchart](docs/flowchart.png)
+
+Source: `docs/flowchart.svg`.
