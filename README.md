@@ -20,19 +20,19 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 - `gotobeacon.c`: GOTO_BEACON sample program from the course (Week 2: load and test)
 - `robot_project.c`: full run (Tasks 1–4), built on GOTO_BEACON
 
-### Wiring assumed by robot_project.c
+### Robot wiring (from the team's working setup)
 
 | Port | Device |
 |------|--------|
 | in1, dgtl10–12 | IR receiver board |
-| dgtl1 | Front limit switch |
-| dgtl2 | Bumper switch |
-| dgtl3–4 | Ultrasonic sensor (INPUT in dgtl3, OUTPUT in dgtl4) |
-| port1 / port10 | Right / left drive motors |
-| port2 | Arm servo (the rod on top that presses the red beacon's button; via Motor Controller 29) |
-| port3 | Claw servo (side-to-side gripper that holds the green beacon; via Motor Controller 29) |
+| dgtl3 | Front limit switch |
+| port1 / port10 | Right / left drive motors (negative speed = forward on this robot) |
+| port2 | Claw servo (holds the green beacon) |
+| port3 | Press arm servo (presses the red beacon's button, then holds the green beacon from behind) |
 
-Tune the arm and claw servo positions and Task 4 values at the top of `robot_project.c` on the real robot.
+No bumper and no ultrasonic sensor. Task 4 pulls the green beacon backward to the estimated start position.
+
+Before running the full program, calibrate the servo positions and measure `MAX_WHEEL_SPEED_CM_PER_SEC` and `TRACK_WIDTH_CM` (settings at the top of `robot_project.c`).
 
 ## Program logic flow
 
