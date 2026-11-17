@@ -1,6 +1,6 @@
 # ENGR 10 Robot Project
 
-ROBOTC programs for the VEX Cortex robot in the ENGR 10 robot project: turn off the red IR beacon, then push the green IR beacon out of the arena.
+ROBOTC programs for the VEX Cortex robot in the ENGR 10 robot project: turn off the red IR beacon, then carry the green IR beacon out of the arena.
 
 ROBOTC setup: Robot → Platform Type → VEX 2.0 Cortex, Natural Language PLTW; communication mode USB Only.
 
@@ -29,9 +29,10 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 | dgtl2 | Bumper switch |
 | dgtl3–4 | Ultrasonic sensor (INPUT in dgtl3, OUTPUT in dgtl4) |
 | port1 / port10 | Right / left drive motors |
-| port2 | Arm servo (the rod on top; via Motor Controller 29) |
+| port2 | Arm servo (the rod on top that presses the red beacon's button; via Motor Controller 29) |
+| port3 | Claw servo (side-to-side gripper that holds the green beacon; via Motor Controller 29) |
 
-Tune the arm servo positions and Task 4 values at the top of `robot_project.c` on the real robot.
+Tune the arm and claw servo positions and Task 4 values at the top of `robot_project.c` on the real robot.
 
 ## Program logic flow
 

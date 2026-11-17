@@ -25,9 +25,9 @@
   <rect class="band" x="10" y="565" width="940" height="240" rx="10" fill="#fbf7f0"/>
   <text class="band-label" x="24" y="588">TASK 2 · TURN OFF RED</text>
   <rect class="band" x="10" y="810" width="940" height="190" rx="10" fill="#f4f6fa"/>
-  <text class="band-label" x="24" y="833">TASK 3 · FIND GREEN BEACON</text>
+  <text class="band-label" x="24" y="833">TASK 3 · FIND AND GRAB GREEN</text>
   <rect class="band" x="10" y="1005" width="940" height="335" rx="10" fill="#fbf7f0"/>
-  <text class="band-label" x="24" y="1028">TASK 4 · PUSH GREEN OUT</text>
+  <text class="band-label" x="24" y="1028">TASK 4 · CARRY GREEN OUT</text>
 
   <!-- Start -->
   <ellipse class="terminal" cx="430" cy="50" rx="70" ry="24"/>
@@ -63,11 +63,11 @@
 
   <!-- 8: switch to green -->
   <rect class="action" x="270" y="832" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="854">Back away from red<tspan x="430" dy="19">Tune IR board to GREEN (10 kHz)</tspan></text>
+  <text class="t" x="430" y="854">Back away, open the claw<tspan x="430" dy="19">Tune IR board to GREEN (10 kHz)</tspan></text>
 
   <!-- 9: drive to green -->
   <rect class="action" x="270" y="922" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="944">Drive to green beacon until<tspan x="430" dy="19">front limit switch is pressed</tspan></text>
+  <text class="t" x="430" y="944">Drive to green until limit switch<tspan x="430" dy="19">is pressed, then close the claw</tspan></text>
 
   <!-- 10: find open side -->
   <rect class="action" x="270" y="1032" width="320" height="56" rx="6"/>
@@ -75,7 +75,7 @@
 
   <!-- 11: push -->
   <rect class="action" x="270" y="1122" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="1155">Push the green beacon forward</text>
+  <text class="t" x="430" y="1155">Drive forward carrying the beacon</text>
 
   <!-- 12: bumper? -->
   <polygon class="decision" points="430,1210 580,1265 430,1320 280,1265"/>
@@ -84,8 +84,8 @@
   <text class="t" x="780" y="1270">Back up and turn</text>
 
   <!-- End -->
-  <ellipse class="terminal" cx="430" cy="1395" rx="150" ry="24"/>
-  <text class="tw" x="430" y="1401">END · green beacon is out</text>
+  <ellipse class="terminal" cx="430" cy="1395" rx="170" ry="24"/>
+  <text class="tw" x="430" y="1401">END · open claw, green is out</text>
 
   <!-- Main flow arrows -->
   <path class="line" d="M430,74 V112"/>
@@ -103,7 +103,7 @@
   <path class="line" d="M430,1088 V1122"/>
   <path class="line" d="M430,1178 V1210"/>
   <path class="line" d="M430,1320 V1371"/>
-  <text class="yn" x="440" y="1345">No (pushed long enough)</text>
+  <text class="yn" x="440" y="1345">No (drove far enough)</text>
 
   <!-- Loops -->
   <!-- 4 No: keep driving -->
