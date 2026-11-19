@@ -35,7 +35,7 @@
 
   <!-- 2: setup -->
   <rect class="action" x="270" y="112" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="134">Open claw, press arm up<tspan x="430" dy="19">Tune IR board to RED (1 kHz)</tspan></text>
+  <text class="t" x="430" y="134">Press the front switch to start;<tspan x="430" dy="19">open claw, arm up, tune to RED</tspan></text>
 
   <!-- 3: drive toward beacon -->
   <rect class="action" x="270" y="212" width="320" height="56" rx="6"/>
@@ -47,9 +47,9 @@
 
   <!-- 5: beacon strong? -->
   <polygon class="decision" points="430,430 580,485 430,540 280,485"/>
-  <text class="t" x="430" y="479">Beacon signal<tspan x="430" dy="19">strong?</tspan></text>
+  <text class="t" x="430" y="479">Right beacon,<tspan x="430" dy="19">strong signal?</tspan></text>
   <rect class="recover" x="660" y="457" width="240" height="56" rx="6"/>
-  <text class="t" x="780" y="479">It's a wall:<tspan x="780" dy="19">back up and turn</tspan></text>
+  <text class="t" x="780" y="479">Wall or other beacon:<tspan x="780" dy="19">back up and go around</tspan></text>
 
   <!-- 6: arm -->
   <rect class="action" x="270" y="582" width="320" height="56" rx="6"/>
@@ -67,7 +67,7 @@
 
   <!-- 9: drive to green -->
   <rect class="action" x="270" y="922" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="944">Drive to green beacon until<tspan x="430" dy="19">front limit switch is pressed</tspan></text>
+  <text class="t" x="430" y="944">Drive to green until the switch is<tspan x="430" dy="19">pressed (go around the red beacon)</tspan></text>
 
   <!-- 10: find open side -->
   <rect class="action" x="270" y="1032" width="320" height="56" rx="6"/>
@@ -75,11 +75,11 @@
 
   <!-- 11: push -->
   <rect class="action" x="270" y="1122" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="1144">Back up toward the start line<tspan x="430" dy="19">(estimated position, no encoders)</tspan></text>
+  <text class="t" x="430" y="1144">Back up to 80 cm behind the start<tspan x="430" dy="19">(estimated position, no encoders)</tspan></text>
 
   <!-- 12: bumper? -->
   <polygon class="decision" points="430,1210 580,1265 430,1320 280,1265"/>
-  <text class="t" x="430" y="1259">Back at the start<tspan x="430" dy="19">(within 15 cm)?</tspan></text>
+  <text class="t" x="430" y="1259">Reached that spot<tspan x="430" dy="19">(within 15 cm)?</tspan></text>
 
   <!-- End -->
   <ellipse class="terminal" cx="430" cy="1395" rx="185" ry="24"/>
