@@ -5,7 +5,7 @@
 /*
 ENGR 10 Week 1 - 4.1.4 Check that motors are working
 Turns the motor (port 1) back and forth, then moves the servo (port 2) to a set number of degrees.
-Change the ports above if yours are plugged in somewhere else (servo on ports 2-9 needs a Motor Controller 29).
+Change the ports above if yours are plugged in somewhere else. The servo plugs straight into one of ports 2-9 (no Motor Controller 29; that is only for 2-wire motors on ports 2-9).
 The VEX servo turns about 100 degrees in total: -50 to +50 degrees from the center.
 */
 int servoDegrees = 45;       // how far to move the servo, -50 to 50
