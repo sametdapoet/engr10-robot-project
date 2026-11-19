@@ -19,8 +19,8 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 
 - `gotobeacon.c`: GOTO_BEACON sample program from the course (Week 2: load and test)
 - `robot_project.c`: full run (Tasks 1–4), built on GOTO_BEACON
-- `servo_center.c`: holds both press-arm servos at the center (0) so the arm can be attached at the right angle
-- `servo_angle_test.c`: steps the press arm (ports 3 and 4) through servo positions to find the up and press values
+- `servo_center.c`: holds the press-arm servo (port 3) at the center (0) so the arm can be attached at the right angle
+- `servo_angle_test.c`: steps the press arm (port 3) through servo positions to find the up and press values
 
 ### Robot wiring (from the team's working setup)
 
@@ -30,7 +30,7 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 | dgtl3 | Front limit switch |
 | port1 / port10 | Right / left drive motors (negative speed = forward on this robot) |
 | port2 | Claw servo (holds the green beacon) |
-| port3 + port4 | Press arm: two servos (press the red beacon's button, then hold the green beacon from behind). Set `PRESS_ARM_B_SIGN` to -1 if they face each other, 1 if they face the same way |
+| port3 | Press arm servo (presses the red beacon's button, then holds the green beacon from behind) |
 
 No bumper and no ultrasonic sensor. Task 4 pulls the green beacon backward to the estimated start position.
 
