@@ -48,7 +48,9 @@
 #define CLAW_CLOSED_POS           60
 #define PRESS_ARM_HOME_POS       -80
 #define PRESS_ARM_BUTTON_POS      60
-#define PRESS_ARM_HOLD_GREEN_POS   20   // Calibrate separately; holds the beacon from behind.
+#define PRESS_ARM_HOLD_GREEN_POS   60   // Arm pressed down on top of the green beacon to pin it
+                                       // while pulling. Start at the button value; raise it if
+                                       // the arm crushes the beacon, lower it if the beacon slips.
 
 #define SERVO_MOVE_TIME_MS       650
 #define BUTTON_PRESS_TIME_MS     500
@@ -99,6 +101,8 @@
 #define RETURN_MAX_STEER             45
 #define HOME_TOLERANCE_CM            15.0
 #define RETURN_TIMEOUT_MS         45000
+#define RETURN_MIN_TIME_MS         1500   // always back up at least this long, even if the
+                                         // position estimate already says "home"
 #define MAX_ODOMETRY_STEP_MS        250
 
 #define PI_VALUE 3.14159265
@@ -527,7 +531,8 @@ int ReturnToStartBackward()
         dy = -robotY;
         distanceToHome = sqrt((dx * dx) + (dy * dy));
 
-        if(distanceToHome <= HOME_TOLERANCE_CM)
+        if(distanceToHome <= HOME_TOLERANCE_CM &&
+           (nSysTime - startTime) >= RETURN_MIN_TIME_MS)
         {
             StopDrive();
             return 1;
@@ -625,14 +630,14 @@ task main()
     if(!foundGreen)
         StopAndHold();
 
-    // TASK 4: grip the green beacon (it stays ON; the task is only to move it).
-    motor[clawServo] = CLAW_CLOSED_POS;
+    // TASK 4: pin the green beacon by pressing the arm down on top of it, then
+    // close the claw around it. The arm stays down while pulling so the beacon
+    // cannot slip out. (Pressing down may switch the green beacon off; that is
+    // fine, the task is only to move it out of the arena.)
+    motor[pressArmServo] = PRESS_ARM_HOLD_GREEN_POS;
     wait1Msec(SERVO_MOVE_TIME_MS);
 
-    // Keep the press arm against the back of the green beacon while the claw
-    // holds it from the front. Calibrate this position to avoid slipping or
-    // crushing the beacon.
-    motor[pressArmServo] = PRESS_ARM_HOLD_GREEN_POS;
+    motor[clawServo] = CLAW_CLOSED_POS;
     wait1Msec(SERVO_MOVE_TIME_MS);
 
     // Pull the green beacon backward to the estimated starting point, across the

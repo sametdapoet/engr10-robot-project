@@ -71,7 +71,7 @@
 
   <!-- 10: find open side -->
   <rect class="action" x="270" y="1032" width="320" height="56" rx="6"/>
-  <text class="t" x="430" y="1054">Close the claw on the green beacon,<tspan x="430" dy="19">press arm holds it from behind</tspan></text>
+  <text class="t" x="430" y="1054">Press the arm down on the green beacon,<tspan x="430" dy="19">then close the claw around it</tspan></text>
 
   <!-- 11: push -->
   <rect class="action" x="270" y="1122" width="320" height="56" rx="6"/>

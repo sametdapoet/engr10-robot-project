@@ -30,7 +30,7 @@ All Week 1 programs use the motor on port 1; the servo check assumes the servo o
 | dgtl3 | Front limit switch |
 | port1 / port10 | Right / left drive motors (negative speed = forward on this robot) |
 | port2 | Claw servo (holds the green beacon) |
-| port3 | Press arm servo (presses the red beacon's button, then holds the green beacon from behind) |
+| port3 | Press arm servo (presses the red beacon's button, then presses down on the green beacon to hold it while pulling) |
 
 No bumper and no ultrasonic sensor. Task 4 pulls the green beacon backward to the estimated start position.
 
