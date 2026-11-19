@@ -81,6 +81,7 @@
 #define VERIFY_SAMPLE_COUNT        6
 #define VERIFY_REQUIRED_CLEAR      4
 #define FREQUENCY_SETTLE_MS      150
+#define CROSSTALK_SETTLE_MS       30   // quick frequency switch for the wrong-beacon check
 
 #define RED_BACKOFF_POWER          35   // positive here means physically backward
 #define RED_BACKOFF_TIME_MS      650
@@ -402,11 +403,42 @@ int BackAwayFromRedBeacon()
     return !LimitSwitchPressed();
 }
 
+// Called right after ReadPD() at targetFrequency. Reads the other beacon's
+// frequency too: when the other beacon is close, the board picks it up even on
+// the wrong frequency (lab guidelines section 7.4). Returns 1 if the other
+// beacon reads stronger, meaning this signal is really the wrong beacon.
+// The target readings (PD0..PD7, PD_sum) are restored before returning.
+int OtherBeaconStronger(int targetFrequency)
+{
+    int s0, s1, s2, s3, s4, s5, s6, s7, targetSum;
+    int otherSum;
+
+    s0 = PD0; s1 = PD1; s2 = PD2; s3 = PD3;
+    s4 = PD4; s5 = PD5; s6 = PD6; s7 = PD7;
+    targetSum = PD_sum;
+
+    SensorValue[digital10] = 1 - targetFrequency;
+    wait1Msec(CROSSTALK_SETTLE_MS);
+    ReadPD();
+    otherSum = PD_sum;
+
+    SensorValue[digital10] = targetFrequency;
+    wait1Msec(CROSSTALK_SETTLE_MS);
+
+    PD0 = s0; PD1 = s1; PD2 = s2; PD3 = s3;
+    PD4 = s4; PD5 = s5; PD6 = s6; PD7 = s7;
+    PD_sum = targetSum;
+
+    return (otherSum > targetSum);
+}
+
 // Drive to the beacon until the front switch is pressed. A press with a weak
-// beacon reading is a wall: back up, turn a little, and keep searching.
+// beacon reading is a wall, and a press where the other beacon reads stronger is
+// the wrong beacon: either way, back up, turn a little, and keep searching.
 int SeekBeacon(int targetFrequency, long timeoutMs)
 {
     long startTime;
+    int wrongBeacon;
 
     StopDrive();
     SetFrequency(targetFrequency);
@@ -417,16 +449,25 @@ int SeekBeacon(int targetFrequency, long timeoutMs)
     {
         ReadPD();
 
+        wrongBeacon = 0;
+        if(PD_sum >= AMBIENT_LEVEL)
+            wrongBeacon = OtherBeaconStronger(targetFrequency);
+
         if(LimitSwitchPressed())
         {
             StopDrive();
-            if(PD_sum >= TOUCH_SIGNAL_LEVEL)
+            if(PD_sum >= TOUCH_SIGNAL_LEVEL && !wrongBeacon)
                 return 1;
 
             DriveStraightFor(-RED_BACKOFF_POWER, WALL_BACKOFF_TIME_MS);
             SpinFor(WALL_TURN_TIME_MS);
             continue;
         }
+
+        // Only the wrong beacon is in view: act as if nothing is seen, so
+        // FollowBeacon() spins to search instead of driving toward it.
+        if(wrongBeacon)
+            PD_sum = 0;
 
         FindMax();
         FollowBeacon();
